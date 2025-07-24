@@ -65,8 +65,23 @@ connectToDb((err) => {
         })
         .catch((err) => {
           res.status(500).json({ error: "Could not create the book" });
-          
         });
+    });
+    app.delete("/books/:id", (req, res) => {
+      // Check if the ID is VALID (not invalid)
+      if (ObjectId.isValid(req.params.id)) {
+        db.collection("books")
+          .deleteOne({ _id: new ObjectId(req.params.id) })
+          .then((result) => {
+            res.status(200).json(result);
+          })
+
+          .catch((err) => {
+            res.status(500).json({ error: "Could not delete the book" });
+          });
+      } else {
+        res.status(400).json({ error: "Invalid book ID" });
+      }
     });
 
     // Start server AFTER everything is set up
