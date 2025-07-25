@@ -92,3 +92,6 @@ connectToDb((err) => {
     console.error("Database connection failed:", err);
   }
 });
+
+
+//mongodb+srv://<db_username>:<db_password>@cluster0.ruc3nnv.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
